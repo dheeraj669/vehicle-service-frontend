@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "8b51d8d1-12f0-482a-9e67-d867c293751a",
+		"name": "Vehicle Service Management System API",
+		"description": "Comprehensive REST API Collection for Vehicle Service Management System.\nBackend: Spring Boot 3.3.4, Java 17+, MySQL 8.0.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8085/api",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Dashboard & Analytics",
+			"item": [
+				{
+					"name": "Get Dashboard Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dashboard/stats",
+							"host": ["{{baseUrl}}"],
+							"path": ["dashboard", "stats"]
+						},
+						"description": "Returns counts of customers, vehicles, service status breakdown, revenue, and recent services."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Customer Management",
+			"item": [
+				{
+					"name": "Get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": ["{{baseUrl}}"],
+							"path": ["customers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers?search=Rahul",
+							"host": ["{{baseUrl}}"],
+							"path": ["customers"],
+							"query": [
+								{
+									"key": "search",
+									"value": "Rahul"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["customers", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register New Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Kavita Sundaram\",\n    \"email\": \"kavita.s@example.com\",\n    \"phone\": \"+91 98450 11223\",\n    \"address\": \"Apt 4B, Silver Oak Residency, Chennai\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": ["{{baseUrl}}"],
+							"path": ["customers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Rahul Sharma (Updated)\",\n    \"email\": \"rahul.sharma@example.com\",\n    \"phone\": \"+91 98765 43210\",\n    \"address\": \"Villa 12, Gachibowli, Hyderabad\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["customers", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["customers", "5"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Vehicle Management",
+			"item": [
+				{
+					"name": "Get All Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vehicles",
+							"host": ["{{baseUrl}}"],
+							"path": ["vehicles"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vehicles?search=Creta",
+							"host": ["{{baseUrl}}"],
+							"path": ["vehicles"],
+							"query": [
+								{
+									"key": "search",
+									"value": "Creta"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle By Registration Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vehicles/by-number/TS09EA1234",
+							"host": ["{{baseUrl}}"],
+							"path": ["vehicles", "by-number", "TS09EA1234"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles by Customer ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vehicles/by-customer/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["vehicles", "by-customer", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register New Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": 1,\n    \"vehicleNumber\": \"TS09XY9999\",\n    \"make\": \"Kia\",\n    \"model\": \"Seltos GTX Plus\",\n    \"year\": 2024,\n    \"vehicleType\": \"SUV\",\n    \"fuelType\": \"PETROL\",\n    \"mileage\": 3500\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vehicles",
+							"host": ["{{baseUrl}}"],
+							"path": ["vehicles"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": 1,\n    \"vehicleNumber\": \"TS09EA1234\",\n    \"make\": \"Hyundai\",\n    \"model\": \"Creta SX(O) Turbo\",\n    \"year\": 2022,\n    \"vehicleType\": \"SUV\",\n    \"fuelType\": \"PETROL\",\n    \"mileage\": 26000\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vehicles/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["vehicles", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vehicles/6",
+							"host": ["{{baseUrl}}"],
+							"path": ["vehicles", "6"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Service Records & Workflows",
+			"item": [
+				{
+					"name": "Get All Service Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/services",
+							"host": ["{{baseUrl}}"],
+							"path": ["services"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Services by Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/services?status=IN_PROGRESS",
+							"host": ["{{baseUrl}}"],
+							"path": ["services"],
+							"query": [
+								{
+									"key": "status",
+									"value": "IN_PROGRESS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service History by Vehicle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/services/by-vehicle/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["services", "by-vehicle", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Service Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vehicleId\": 1,\n    \"serviceType\": \"PERIODIC_MAINTENANCE\",\n    \"description\": \"30,000 KM Major Service - Engine Flush, Coolant change, spark plug check.\",\n    \"status\": \"PENDING\",\n    \"priority\": \"HIGH\",\n    \"scheduledDate\": \"2026-10-18\",\n    \"technicianName\": \"Ramesh Kumar\",\n    \"laborCost\": 1200.00,\n    \"partsCost\": 2200.00,\n    \"notes\": \"Customer reported minor vibration in steering wheel at 80 km/h\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/services",
+							"host": ["{{baseUrl}}"],
+							"path": ["services"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Service Record (Full)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vehicleId\": 1,\n    \"serviceType\": \"PERIODIC_MAINTENANCE\",\n    \"description\": \"30,000 KM Major Service\",\n    \"status\": \"IN_PROGRESS\",\n    \"priority\": \"HIGH\",\n    \"scheduledDate\": \"2026-10-18\",\n    \"completionDate\": null,\n    \"technicianName\": \"Ramesh Kumar\",\n    \"laborCost\": 1400.00,\n    \"partsCost\": 2500.00,\n    \"notes\": \"Wheels balanced; oil drained\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/services/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["services", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Service Status & Billing (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"COMPLETED\",\n    \"laborCost\": 1400.00,\n    \"partsCost\": 2850.00,\n    \"notes\": \"Work completed and road tested. Ready for delivery.\",\n    \"completionDate\": \"2026-10-12\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/services/3/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["services", "3", "status"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service Record",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/services/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["services", "5"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
